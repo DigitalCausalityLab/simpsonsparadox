@@ -1,0 +1,17 @@
+{
+  "name": "colliderbias",
+  "stack": "container",
+  "description": "This is a Shiny application illustrating the Simpson's paradox, which uses heroku-docker-r for Heroku.",
+  "keywords": [
+    "r",
+    "shiny"
+  ],
+  "repository": "https://github.com/DigitalCausalityLab/simpsonsparadox",
+  "logo": "https://github.com/DigitalCausalityLab/simpsonsparadox/raw/master/logo.png",
+  "success_url": "/",
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  }
+}
