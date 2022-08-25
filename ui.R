@@ -18,7 +18,7 @@ shinyUI(dashboardPage(
   dashboardBody(
     # Layout option defined in "R/Packages_Colors.R"
     tags$head(tags$style(HTML(
-        ".box.box-solid.box-primary>.box-header {
+      ".box.box-solid.box-primary>.box-header {
         color:#fff;
         background:#000000
         }
@@ -28,7 +28,7 @@ shinyUI(dashboardPage(
         border-right-color:#000000;
         border-top-color:#000000;
         }"),
-        HTML("
+      HTML("
         .box.box-solid.box-success>.box-header {
         color:#000000;
         background:#ffda3e
@@ -47,40 +47,43 @@ shinyUI(dashboardPage(
     tabItems(
       tabItem(tabName = "simpson",
               h2("Simpson's Paradox: Cholesterol Example"),
-              p("Example based on Glymour et al. (2016) 'Causal Inference: A Primer', Section 1.2. Click on the checkbox to see how scatter plot, regression line, regression output and DAG change when we condition on the confounder 'age'."),
-              fluidRow(
-                box(
-                  title = "Options", solidHeader = TRUE, status = boxcol_1,
-                  checkboxInput("age",
-                                "Conditioning on age group",
-                                value = FALSE),
-                  checkboxInput("regression_line",
-                                "Show regression line",
-                                value = TRUE),
-                  width = 3
-                ),
-
-                box(
-                  title = "Scatter Plot", solidHeader = TRUE, status = boxcol_2,
-                  plotOutput("age_scatter_plot", height = 450),
-                  width = 9
-                )
-
-              ),
+              p("This app illustrates the Simpson's Paradox based on the Cholesterol Example in Glymour et al. (2016, Section 1.2). In this example, we want to assess the effect of exercise on cholesterol in various age groups. The scatter plot below suggests that overall more exercise leads to higher cholesterol. However, if we consider each of the age groups separately, the sign of the effect is negative."),
+              h2("Does More Exercise lead to Higher Cholesterol?"),
+              p(""),
               h2("Regression Output and Directed Acyclic Graph (DAG)"),
               p("Regression output corresponding to sample selection, i.e., do (not) only condition on age."),
+              p("Click on the checkbox to see how scatter plot, regression line, regression output and DAG change when we condition on the confounder 'age'."),
               fluidRow(
                 box(
-                  title = "Regression Output", solidHeader = TRUE, status = boxcol_1,
-                  gt_output("regression_tbl"),
-                  width = 12
-                ),
-
+                  fluidRow(
+                    box(
+                      title = "Options", solidHeader = TRUE, status = boxcol_1,
+                      checkboxInput("age",
+                                    "Conditioning on age group",
+                                    value = FALSE),
+                      checkboxInput("regression_line",
+                                    "Show regression line",
+                                    value = TRUE),
+                      width = 12
+                    ),
+                    box(
+                      title = "Regression Output", solidHeader = TRUE, status = boxcol_1,
+                      gt_output("regression_tbl"),
+                      width = 12
+                    )),
+                  width = 4),
                 box(
-                  title = "DAG", solidHeader = TRUE, status = boxcol_2,
-                  plotOutput("age_dag", height = 450),
-                  width = 12
-                )
+                  fluidRow(
+                    box(
+                      title = "Scatter Plot", solidHeader = TRUE, status = boxcol_2,
+                      plotOutput("age_scatter_plot", height = 450),
+                      width = 12),
+                    box(
+                      title = "DAG", solidHeader = TRUE, status = boxcol_2,
+                      plotOutput("age_dag", height = 450),
+                      width = 12
+                    )),
+                  width = 8)
               )
       ),
       tabItem(tabName = "code",
