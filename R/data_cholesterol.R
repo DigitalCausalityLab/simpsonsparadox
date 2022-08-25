@@ -17,6 +17,7 @@ cholesterol = 130 + (-0.5) * exercise + rnorm(n, sd = ch_sd) + Avg.Age_group * e
 
 
 data = data.frame("Cholesterol" = cholesterol, "Exercise" = exercise,
-                  "Avg.Age" = factor(Avg.Age_group))
+                  "Avg.Age" = factor(Avg.Age_group,
+                                     levels = c("10", "20", "30", "40", "50")))
 data = as_tibble(data)
 data
