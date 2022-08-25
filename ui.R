@@ -67,7 +67,7 @@ shinyUI(dashboardPage(
                       width = 12
                     ),
                     box(
-                      title = "Regression Output", solidHeader = TRUE, status = boxcol_1,
+                      title = "Regression Output", solidHeader = TRUE, status = boxcol_2,
                       gt_output("regression_tbl"),
                       width = 12
                     )),
