@@ -1,13 +1,28 @@
 # Generate regression output
-reg_unconditional <- lm(Cholesterol ~ Exercise, data) %>%
-  tbl_regression() %>% as_gt()
+lm_unconditional <- data %>% lm(Cholesterol ~ Exercise, data =.) %>%
+  summary()
 
-# TODO: Fix implementation and output
-# reg_conditional <- data %>% group_by(Avg.Age) %>%
-#   do(tidy(lm(Cholesterol ~ Exercise, data = .)))
+reg_unconditional <- tibble("Age Group" =  c("10 - 50")) %>%
+  mutate("Estimate" = c(lm_unconditional$coefficients[2, "Estimate"])) %>%
+  mutate("p.value" = c(lm_unconditional$coefficients[2, 4])) %>%
+  gt() %>%
+  cols_label(`Age Group` = md("**Age Group**"),
+             Estimate = md("**Estimate**"),
+             p.value = md("**Pr(>|t|)**")) %>%
+  fmt_number(columns = 2:3,
+             decimals = 3)
 
-age_groups <- levels(data$Avg.Age)
-models <- lapply(age_groups, function(x) models = lm(Cholesterol ~ Exercise, data[data$Avg.Age == x,]))
-reg_conditional <- lapply(models, tbl_regression) %>%
-  tbl_merge(tab_spanner = age_groups) %>%
-  as_gt()
+
+reg_conditional <- data %>% group_by(Avg.Age) %>%
+  group_map(~ broom::tidy(lm(Cholesterol ~ Exercise, data = .x))) %>%
+  bind_rows() %>% filter(term == "Exercise") %>%
+  mutate("Age Group" = levels(data$Avg.Age)) %>%
+  # mutate(p.value = round(p.value,4)) %>%
+  rename(Estimate = estimate) %>%
+  select("Age Group", Estimate, p.value) %>%
+  gt() %>%
+  cols_label(`Age Group` = md("**Age Group**"),
+             Estimate = md("**Estimate**"),
+             p.value = md("**Pr(>|t|)**")) %>%
+  fmt_number(columns = 2:3,
+             decimals = 3)
