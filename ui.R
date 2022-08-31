@@ -11,7 +11,7 @@ shinyUI(dashboardPage(
       # Watch out for `tabName`: Must be matched by definition
       # of the 'tabItem' below
       menuItem("Simpson's Paradox", tabName = "simpson",icon = icon("chart-line")),
-      menuItem("Code", tabName = "code", icon = icon("github")),
+      menuItem("Code", tabName = "code", icon = icon("code")),
       menuItem("References", tabName = "references", icon = icon("book")))
   ),
   # Adjust Body of Dashboard
