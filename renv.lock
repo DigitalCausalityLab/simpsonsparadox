@@ -390,10 +390,10 @@
     },
     "ggdag": {
       "Package": "ggdag",
-      "Version": "0.2.4",
+      "Version": "0.2.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "b2635735dd8573598f331b4db00a0592",
+      "Hash": "9ad5056ef82b1de0b76a52c9ba81f3b8",
       "Requirements": [
         "dagitty",
         "dplyr",
