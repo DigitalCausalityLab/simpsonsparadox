@@ -1,6 +1,6 @@
 # Generate scatter plots
 plot_unconditional <-  ggplot(data, aes(y = Cholesterol, x = Exercise,
-                                        color = Avg.Age)) +
+                                        color = Avg.Age, shape = Avg.Age)) +
   geom_point(size = 2) +
   theme_classic()
 
