@@ -1,6 +1,6 @@
 # Generate scatter plots
-plot_unconditional <-  ggplot(data, aes(y = Cholesterol, x = Exercise,
-                                        color = Avg.Age, shape = Avg.Age)) +
+plot_unconditional <-  ggplot(data, aes(y = Cholesterol, x = Exercise
+                                      )) +
   geom_point(size = 2) +
   theme_classic()
 
@@ -13,4 +13,4 @@ plot_unconditional_regressionline <- plot_unconditional +
   geom_smooth(formula = y ~ x, method = "lm", se = FALSE, color = "red")
 
 plot_conditional_regressionline <- plot_conditional +
-  geom_smooth(formula = y ~ x, method = "lm", se = FALSE)
+  geom_smooth(formula = y ~ x, method = "lm", se = FALSE, color = "red")
